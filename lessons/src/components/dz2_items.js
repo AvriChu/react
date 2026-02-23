@@ -1,8 +1,7 @@
 const ItemsFunct = props => {
   return (
     <li key={`${props.element}${props.index}`}>
-      {props.element}
-      {props.index}
+      {props.index}-{props.element}
     </li>
   );
 };
