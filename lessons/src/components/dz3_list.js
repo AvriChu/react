@@ -1,9 +1,9 @@
 const MasuvList = props => {
   return (
     <div>
-      <p>
+      <li>
         {props.id} - {props.name}
-      </p>
+      </li>
       <button onClick={() => props.deleteObj(props.id)} type='button'>
         Видалити
       </button>
