@@ -1,10 +1,23 @@
-import { Component, use, useState } from 'react';
+import {
+  Component,
+  use,
+  useEffect,
+  useLayoutEffect,
+  useReducer,
+  useRef,
+  useState,
+} from 'react';
 import './App.css';
 import Fun2 from './components/dz1_class';
 import Fun1 from './components/dz1_function';
 import ItemsFunct from './components/dz2_items';
 import MasuvList from './components/dz3_list';
 import ComponentClass from './components/dz4_classComponent';
+import DZ1 from './components/dz5_1';
+import DZ2 from './components/dz5_2';
+import DZ3 from './components/dz5_3';
+import DZ4 from './components/dz5_4';
+import DZ5 from './components/dz5_5';
 
 // function App() {
 // ДЗ 1
@@ -131,12 +144,27 @@ import ComponentClass from './components/dz4_classComponent';
 //   );
 // }
 // ДЗ 4
+// function App() {
+//   return (
+//     <>
+//       <ComponentClass />
+//     </>
+//   );
+// }
+
+// ДЗ 5
+
 function App() {
   return (
-    <>
-      <ComponentClass />
-    </>
+    <div className='App'>
+      <header className='App-header'>
+        <DZ1 />
+        <DZ2 />
+        <DZ3 />
+        <DZ4 />
+        <DZ5 />
+      </header>
+    </div>
   );
 }
-
 export default App;
