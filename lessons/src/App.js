@@ -18,6 +18,9 @@ import DZ2 from './components/dz5_2';
 import DZ3 from './components/dz5_3';
 import DZ4 from './components/dz5_4';
 import DZ5 from './components/dz5_5';
+import DZ6_1 from './components/dz6_1';
+import DZ6_2 from './components/dz6_2';
+import { useWindowWidth } from './components/useWindowWidth';
 
 // function App() {
 // ДЗ 1
@@ -154,15 +157,31 @@ import DZ5 from './components/dz5_5';
 
 // ДЗ 5
 
+// function App() {
+//   return (
+//     <div className='App'>
+//       <header className='App-header'>
+//         <DZ1 />
+//         <DZ2 />
+//         <DZ3 />
+//         <DZ4 />
+//         <DZ5 />
+//       </header>
+//     </div>
+//   );
+// }
+// export default App;
+
+// ДЗ 6
 function App() {
+  const [width, setWidth] = useWindowWidth();
   return (
     <div className='App'>
       <header className='App-header'>
-        <DZ1 />
-        <DZ2 />
-        <DZ3 />
-        <DZ4 />
-        <DZ5 />
+        <DZ6_1 />
+        <DZ6_2 />
+        {/* Задача 3 */}
+        <p>Ширина вікна: {width}</p>
       </header>
     </div>
   );
