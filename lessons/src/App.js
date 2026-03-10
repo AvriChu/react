@@ -21,6 +21,7 @@ import DZ5 from './components/dz5_5';
 import DZ6_1 from './components/dz6_1';
 import DZ6_2 from './components/dz6_2';
 import { useWindowWidth } from './components/useWindowWidth';
+import Dz7_forms from './components/dz7_forms';
 
 // function App() {
 // ДЗ 1
@@ -189,67 +190,77 @@ import { useWindowWidth } from './components/useWindowWidth';
 // export default App;
 
 // ДЗ 7
-function App() {
-  const [input, setInput] = useState('');
-  const [item, setItem] = useState([
-    { id: 1, name: 'name1' },
-    { id: 2, name: 'name2' },
-    { id: 3, name: 'name3' },
-  ]);
-  const [newId, setNewId] = useState(item.length + 1);
-  const deleteObj = id => {
-    setItem(prev => prev.filter(item => item.id !== id));
-  };
-  const clickHandler = input => {
-    if (!input || input.trim().length === 0) {
-      return;
-    }
-    setNewId(newId + 1);
-    const updateElement = [...item, { id: newId, name: input }];
-    setItem(updateElement);
-    setInput('');
-  };
-  const changeHandler = e => {
-    const value = e.target.value;
-    setInput(value);
-  };
-  const onKeyFunk = e => {
-    if (e.key === 'Enter') {
-      if (!input || input.trim().length === 0) {
-        return;
-      }
-      setNewId(newId + 1);
-      const updateElement = [...item, { id: newId, name: input }];
-      setItem(updateElement);
-      setInput('');
-    }
-  };
+// function App() {
+//   const [input, setInput] = useState('');
+//   const [item, setItem] = useState([
+//     { id: 1, name: 'name1' },
+//     { id: 2, name: 'name2' },
+//     { id: 3, name: 'name3' },
+//   ]);
+//   const [newId, setNewId] = useState(item.length + 1);
+//   const deleteObj = id => {
+//     setItem(prev => prev.filter(item => item.id !== id));
+//   };
+//   const clickHandler = input => {
+//     if (!input || input.trim().length === 0) {
+//       return;
+//     }
+//     setNewId(newId + 1);
+//     const updateElement = [...item, { id: newId, name: input }];
+//     setItem(updateElement);
+//     setInput('');
+//   };
+//   const changeHandler = e => {
+//     const value = e.target.value;
+//     setInput(value);
+//   };
+//   const onKeyFunk = e => {
+//     if (e.key === 'Enter') {
+//       if (!input || input.trim().length === 0) {
+//         return;
+//       }
+//       setNewId(newId + 1);
+//       const updateElement = [...item, { id: newId, name: input }];
+//       setItem(updateElement);
+//       setInput('');
+//     }
+//   };
 
+//   return (
+//     <div className='App'>
+//       <header className='App-header'>
+//         <input
+//           onKeyDown={onKeyFunk}
+//           className='input'
+//           onChange={changeHandler}
+//           value={input}
+//         />
+//         <h1 className='tittle'>{item.length}</h1>
+//         <ul>
+//           {item.map(item1 => (
+//             <MasuvList
+//               key={item1.id}
+//               id={item1.id}
+//               name={item1.name}
+//               deleteObj={deleteObj}
+//             />
+//           ))}
+//         </ul>
+//         <button className='button-37' onClick={() => clickHandler(input)}>
+//           Add TO DO{' '}
+//         </button>
+//       </header>
+//     </div>
+//   );
+// }
+// export default App;
+
+// ДЗ 8
+function App() {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <input
-          onKeyDown={onKeyFunk}
-          className='input'
-          onChange={changeHandler}
-          value={input}
-        />
-        <h1 className='tittle'>{item.length}</h1>
-        <ul>
-          {item.map(item1 => (
-            <MasuvList
-              key={item1.id}
-              id={item1.id}
-              name={item1.name}
-              deleteObj={deleteObj}
-            />
-          ))}
-        </ul>
-        <button className='button-37' onClick={() => clickHandler(input)}>
-          Add TO DO{' '}
-        </button>
-      </header>
-    </div>
+    <header className='App-header'>
+      <Dz7_forms />
+    </header>
   );
 }
 export default App;
