@@ -138,3 +138,16 @@
 .button-24:active {
   opacity: 0.5;
 }
+
+.list-item {
+  margin-bottom: 15px;
+  background-color: #375a46;
+  border-radius: 15px;
+}
+
+.input-list {
+  margin-bottom: 20px;
+  background-color: #3d4843;
+  border-radius: 15px;
+  padding: 30px;
+}

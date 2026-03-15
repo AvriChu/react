@@ -22,6 +22,7 @@ import DZ6_1 from './components/dz6_1';
 import DZ6_2 from './components/dz6_2';
 import { useWindowWidth } from './components/useWindowWidth';
 import Dz7_forms from './components/dz7_forms';
+import Dz9_todo from './components/dz9_todo';
 
 // function App() {
 // ДЗ 1
@@ -256,10 +257,20 @@ import Dz7_forms from './components/dz7_forms';
 // export default App;
 
 // ДЗ 8
+// function App() {
+//   return (
+//     <header className='App-header'>
+//       <Dz7_forms />
+//     </header>
+//   );
+// }
+// export default App;
+
+// ДЗ 9
 function App() {
   return (
     <header className='App-header'>
-      <Dz7_forms />
+      <Dz9_todo />
     </header>
   );
 }

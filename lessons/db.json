@@ -1,0 +1,12 @@
+{
+  "todos": [
+    {
+      "id": "4ddb",
+      "tittle": "ываыва",
+      "desription": "ываывавпвап",
+      "checked": false,
+      "creactionDate": "15.03.2026"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
