@@ -7,7 +7,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import './App.css';
 import Fun2 from './components/dz1_class';
 import Fun1 from './components/dz1_function';
 import ItemsFunct from './components/dz2_items';
@@ -23,6 +22,13 @@ import DZ6_2 from './components/dz6_2';
 import { useWindowWidth } from './components/useWindowWidth';
 import Dz7_forms from './components/dz7_forms';
 import Dz9_todo from './components/dz9_todo';
+import { Routes, Route, Link } from 'react-router-dom';
+import './App.css';
+import HomePage from './dz10_pages/homePage';
+import { BrowserRouter } from 'react-router-dom';
+import AboutPage from './dz10_pages/aboutPage';
+import Leyout from './dz10_pages/Leyout';
+import TodoEdit from './dz10_pages/TodoEdit';
 
 // function App() {
 // ДЗ 1
@@ -267,11 +273,30 @@ import Dz9_todo from './components/dz9_todo';
 // export default App;
 
 // ДЗ 9
+// function App() {
+//   return (
+//     <header className='App-header'>
+//       <Dz9_todo />
+//     </header>
+//   );
+// }
+// export default App;
+// ДЗ 10
+
 function App() {
   return (
-    <header className='App-header'>
-      <Dz9_todo />
-    </header>
+    <BrowserRouter>
+      <main>
+        <Routes>
+          <Route path='/' element={<Leyout />}>
+            <Route index element={<HomePage />} />
+            <Route path='/todos' element={<Dz9_todo />} />
+            <Route path='/todos/:id' element={<TodoEdit />} />
+            <Route path='/about' element={<AboutPage />} />
+          </Route>
+        </Routes>
+      </main>
+    </BrowserRouter>
   );
 }
 export default App;

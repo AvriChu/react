@@ -12,7 +12,10 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+a {
+  text-decoration: none;
+  color: black;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -150,4 +153,33 @@
   background-color: #3d4843;
   border-radius: 15px;
   padding: 30px;
+}
+
+.new-header {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: white;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  z-index: 1000;
+  justify-content: center;
+  gap: 15px;
+}
+.some-info {
+  padding: 50px;
+}
+.all-about-autor {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: center;
+}
+.active {
+  font-weight: bold;
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { GetList } from '../api/api';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 const Dz9_todo = () => {
   const getFun = async () => {
@@ -44,7 +45,6 @@ const Dz9_todo = () => {
       setRequestLoading(true);
       const response = await axios.get(`todos/${id}`);
       setEditTodo(response.data);
-      setEditOpen(true);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -58,7 +58,6 @@ const Dz9_todo = () => {
       setTodos(prev =>
         prev.map(item => (item.id === editTodo.id ? response.data : item)),
       );
-      setEditOpen(false);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -90,13 +89,16 @@ const Dz9_todo = () => {
     checked: false,
   });
   const [editTodo, setEditTodo] = useState(null);
-  const [editOpen, setEditOpen] = useState(false);
   const [requestLoading, setRequestLoading] = useState(false);
   if (error) {
-    return <div style={{ color: 'red' }}>Відбулася помилка: {error}</div>;
+    return (
+      <div className='App-header' style={{ color: 'red' }}>
+        Відбулася помилка: {error}
+      </div>
+    );
   }
   return (
-    <>
+    <div className='App-header'>
       {requestLoading && <h2>Loading...</h2>}
       <ul>
         <button className='button-37' onClick={() => setButtonsCl(true)}>
@@ -148,54 +150,6 @@ const Dz9_todo = () => {
             </button>
           </div>
         )}
-        {editOpen && editTodo && (
-          <div className='input-list'>
-            <h3>Редагувати Todo</h3>
-
-            <label>Ім'я</label>
-            <input
-              type='text'
-              value={editTodo.tittle}
-              onChange={e =>
-                setEditTodo(prev => ({
-                  ...prev,
-                  tittle: e.target.value,
-                }))
-              }
-            />
-
-            <label>Опис</label>
-            <input
-              type='text'
-              value={editTodo.desription}
-              onChange={e =>
-                setEditTodo(prev => ({
-                  ...prev,
-                  desription: e.target.value,
-                }))
-              }
-            />
-
-            <label>Виконаний?</label>
-            <input
-              type='checkbox'
-              checked={editTodo.checked}
-              onChange={e =>
-                setEditTodo(prev => ({
-                  ...prev,
-                  checked: e.target.checked,
-                }))
-              }
-            />
-
-            <button onClick={saveEdit} className='button-37'>
-              Зберегти
-            </button>
-            <button onClick={() => setEditOpen(false)} className='button-24'>
-              Скасувати
-            </button>
-          </div>
-        )}
         {loading ? (
           <h1>Loading todos...</h1>
         ) : todos.length === 0 ? (
@@ -214,14 +168,14 @@ const Dz9_todo = () => {
               <button onClick={() => deleteFun(todo.id)} className='button-24'>
                 Видалити
               </button>
-              <button onClick={() => editFun(todo.id)} className='button-24'>
+              <Link className='button-24' to={`${todo.id}`}>
                 Редагувати
-              </button>
+              </Link>
             </div>
           ))
         )}
       </ul>
-    </>
+    </div>
   );
 };
 
