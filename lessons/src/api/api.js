@@ -9,8 +9,11 @@ export const GetList = async () => {
   const todos = await axios.get('todos');
   return todos.data;
 };
-
 export const GetTodo = async id => {
   const todo = await axios.get(`todos/${id}`);
   return todo.data;
+};
+export const GetAuth = async () => {
+  const res = await axios.get('auth');
+  return res.data;
 };

@@ -1,4 +1,7 @@
 {
+  "auth": {
+    "isAuthenticated": false
+  },
   "todos": [
     {
       "id": "1",
