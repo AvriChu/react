@@ -1,6 +1,6 @@
 {
   "auth": {
-    "isAuthenticated": false
+    "isAuthenticated": true
   },
   "todos": [
     {
@@ -23,6 +23,13 @@
       "desription": "werwer",
       "checked": false,
       "creactionDate": "18.03.2026"
+    },
+    {
+      "id": "b427",
+      "tittle": "zxcxc",
+      "desription": "zcxc",
+      "checked": false,
+      "creactionDate": "23.03.2026"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
