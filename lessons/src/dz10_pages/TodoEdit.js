@@ -13,7 +13,6 @@ const TodoEdit = () => {
     queryKey: ['todoItem', id],
     queryFn: () => GetTodo(id),
   });
-  console.log(data);
   const [editTodo, setEditTodo] = useState(null);
   useEffect(() => {
     if (data) {

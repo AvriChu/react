@@ -32,6 +32,8 @@ import Loader from './dz10_pages/Loader';
 import PrivateRoute from './dz10_pages/PrivateRoute';
 import { GetAuth } from './api/api';
 import { AuthContext } from './components/AuthContext';
+import { useDispatch } from 'react-redux';
+import { fetchUser } from './redux/user/UserSlice';
 // import HomePage from './dz10_pages/homePage';
 
 // import AboutPage from './dz10_pages/aboutPage';
@@ -290,7 +292,7 @@ import { AuthContext } from './components/AuthContext';
 //   );
 // }
 // export default App;
-// ДЗ 10, 11, 12
+// ДЗ 10, 11, 12, 13
 const HomePage = lazy(() => import('./dz10_pages/homePage'));
 const AboutPage = lazy(() => import('./dz10_pages/aboutPage'));
 const Leyout = lazy(() => import('./dz10_pages/Leyout'));
@@ -298,58 +300,58 @@ const TodoEdit = lazy(() => import('./dz10_pages/TodoEdit'));
 const NotFoundPage = lazy(() => import('./dz10_pages/notFoundPage'));
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
-  const authFun = async () => {
-    try {
-      const data = await GetAuth();
-      setIsAuth(data.isAuthenticated);
-    } catch (error) {
-      console.warn('Ops! ', error);
-    }
-  };
+  const dispatch = useDispatch();
+  // const [isAuth, setIsAuth] = useState(false);
+  // const authFun = async () => {
+  //   try {
+  //     const data = await GetAuth();
+  //     setIsAuth(data.isAuthenticated);
+  //   } catch (error) {
+  //     console.warn('Ops! ', error);
+  //   }
+  // };
   useEffect(() => {
-    authFun();
-  }, []);
+    dispatch(fetchUser());
+  }, [dispatch]);
+
   return (
-    <AuthContext.Provider value={{ isAuth }}>
-      <BrowserRouter>
-        <main>
-          <Suspense fallback={<Loader />}>
-            <Routes>
-              <Route path='/' element={<Leyout />}>
-                <Route index element={<HomePage />} />
-                <Route
-                  path='/todos'
-                  element={
-                    <PrivateRoute>
-                      <Dz9_todo />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path='/todos/:id'
-                  element={
-                    <PrivateRoute>
-                      <TodoEdit />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path='/about'
-                  element={
-                    <PrivateRoute>
-                      <AboutPage />
-                    </PrivateRoute>
-                  }
-                />
-                <Route path='/404' element={<NotFoundPage />} />
-                <Route path='*' element={<Navigate to='/404' />} />
-              </Route>
-            </Routes>
-          </Suspense>
-        </main>
-      </BrowserRouter>
-    </AuthContext.Provider>
+    <BrowserRouter>
+      <main>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path='/' element={<Leyout />}>
+              <Route index element={<HomePage />} />
+              <Route
+                path='/todos'
+                element={
+                  <PrivateRoute>
+                    <Dz9_todo />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path='/todos/:id'
+                element={
+                  <PrivateRoute>
+                    <TodoEdit />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path='/about'
+                element={
+                  <PrivateRoute>
+                    <AboutPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route path='/404' element={<NotFoundPage />} />
+              <Route path='*' element={<Navigate to='/404' />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </main>
+    </BrowserRouter>
   );
 }
 export default App;

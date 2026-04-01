@@ -2,94 +2,88 @@ import { useEffect, useState } from 'react';
 import { GetList } from '../api/api';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-const Dz9_todo = () => {
-  const getFun = async () => {
-    if (inputList.name && inputList.desription) {
-      try {
-        setRequestLoading(true);
+import { useDispatch, useSelector } from 'react-redux';
+import { addTodo, deleteTodo, fetchList } from '../redux/todos/TodosSlice';
 
-        const newTodo = {
-          tittle: inputList.name,
-          desription: inputList.desription,
-          checked: inputList.checked,
-          creactionDate: new Date().toLocaleDateString('ua-UA'),
-        };
-        const response = await axios.post('todos', newTodo);
-        setButtonsCl(false);
-        setTodos(prev => [...prev, response.data]);
-        setInputList({
-          name: '',
-          desription: '',
-          checked: false,
-        });
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setRequestLoading(false);
-      }
-    }
+const Dz9_todo = () => {
+  // const getFun = async () => {
+  //   if (inputList.name && inputList.desription) {
+  //     try {
+  //       setRequestLoading(true);
+  //       const newTodo = {
+  //         tittle: inputList.name,
+  //         desription: inputList.desription,
+  //         checked: inputList.checked,
+  //         creactionDate: new Date().toLocaleDateString('ua-UA'),
+  //       };
+  //       const response = await axios.post('todos', newTodo);
+  //       setButtonsCl(false);
+  //       setTodos(prev => [...prev, response.data]);
+  //       setInputList({
+  //         name: '',
+  //         desription: '',
+  //         checked: false,
+  //       });
+  //     } catch (error) {
+  //       setError(error.message);
+  //     } finally {
+  //       setRequestLoading(false);
+  //     }
+  //   }
+  // };
+  const getFun = async () => {
+    dispatch(addTodo(inputList));
+    setButtonsCl(false);
+    setInputList({
+      name: '',
+      desription: '',
+      checked: false,
+    });
   };
+  // const deleteFun = async id => {
+  //   try {
+  //     // setRequestLoading(true);
+  //     await axios.delete(`todos/${id}`);
+  //     setTodos(prev => prev.filter(item => item.id !== id));
+  //   } catch (error) {
+  //     setError(error.message);
+  //   } finally {
+  //     // setRequestLoading(false);
+  //   }
+  // };
   const deleteFun = async id => {
-    try {
-      setRequestLoading(true);
-      await axios.delete(`todos/${id}`);
-      setTodos(prev => prev.filter(item => item.id !== id));
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setRequestLoading(false);
-    }
+    dispatch(deleteTodo(id));
   };
-  const editFun = async id => {
-    try {
-      setRequestLoading(true);
-      const response = await axios.get(`todos/${id}`);
-      setEditTodo(response.data);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setRequestLoading(false);
-    }
-  };
-  const saveEdit = async () => {
-    try {
-      setRequestLoading(true);
-      const response = await axios.put(`todos/${editTodo.id}`, editTodo);
-      setTodos(prev =>
-        prev.map(item => (item.id === editTodo.id ? response.data : item)),
-      );
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setRequestLoading(false);
-    }
-  };
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const data = await GetList();
-      setTodos(data);
-    } catch (error) {
-      console.warn('Ops! ', error);
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const fetchData = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const data = await GetList();
+  //     setTodos(data);
+  //   } catch (error) {
+  //     console.warn('Ops! ', error);
+  //     setError(error.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  const dispatch = useDispatch();
   useEffect(() => {
-    fetchData();
-  }, []);
-  const [todos, setTodos] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [buttonCl, setButtonsCl] = useState(false);
-  const [error, setError] = useState(null);
+    // fetchData();
+    dispatch(fetchList());
+  }, [dispatch]);
+
+  // const [todos, setTodos] = useState([]);
+  // const [error, setError] = useState(null);
   const [inputList, setInputList] = useState({
     name: '',
     desription: '',
     checked: false,
   });
-  const [editTodo, setEditTodo] = useState(null);
-  const [requestLoading, setRequestLoading] = useState(false);
+  // const [requestLoading, setRequestLoading] = useState(false);
+  const todos = useSelector(state => state.todos.todos);
+  const loading = useSelector(state => state.todos.loading);
+  const error = useSelector(state => state.todos.error);
+  const [buttonCl, setButtonsCl] = useState(false);
   if (error) {
     return (
       <div className='App-header' style={{ color: 'red' }}>
@@ -99,7 +93,7 @@ const Dz9_todo = () => {
   }
   return (
     <div className='App-header'>
-      {requestLoading && <h2>Loading...</h2>}
+      {loading && <h2>Loading...</h2>}
       <ul>
         <button className='button-37' onClick={() => setButtonsCl(true)}>
           Add TO DO
